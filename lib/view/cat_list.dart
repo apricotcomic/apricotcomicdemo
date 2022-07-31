@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:apricotcomicdemo/model/cats.dart';
-import 'package:apricotcomicdemo/model/db_helper.dart';
+import 'package:apricotcomicdemo/model/firestore_cats.dart';
+import 'package:apricotcomicdemo/model/firestore_helper.dart';
 import 'package:apricotcomicdemo/view/cat_detail.dart';
 import 'package:apricotcomicdemo/view/cat_detail_edit.dart';
 
@@ -28,7 +28,7 @@ class _CatListPageState extends State<CatList> {
 // catsテーブルに登録されている全データを取ってくる
   Future getCatsList() async {
     setState(() => isLoading = true);                   //テーブル読み込み前に「読み込み中」の状態にする
-    catList = await DbHelper.instance.selectAllCats();  //catsテーブルを全件読み込む
+    catList = await FirestoreHelper.instance.selectAllCats("1");  //catsテーブルを全件読み込む
     setState(() => isLoading = false);                  //「読み込み済」の状態にする
   }
 
@@ -68,7 +68,7 @@ class _CatListPageState extends State<CatList> {
                       onTap: () async {                     // cardをtapしたときの処理を設定
                         await Navigator.of(context).push(   // ページ遷移をNavigatorで設定
                           MaterialPageRoute(
-                            builder: (context) => CatDetail(id: cat.id!),   // cardのデータの詳細を表示するcat_detail.dartへ遷移
+                            builder: (context) => CatDetail(id: cat.id),   // cardのデータの詳細を表示するcat_detail.dartへ遷移
                           ),
                         );
                         getCatsList();    // データが更新されているかもしれないので、catsテーブル全件読み直し
