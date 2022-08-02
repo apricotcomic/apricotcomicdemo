@@ -28,7 +28,7 @@ class _CatListPageState extends State<CatList> {
 // catsテーブルに登録されている全データを取ってくる
   Future getCatsList() async {
     setState(() => isLoading = true);                   //テーブル読み込み前に「読み込み中」の状態にする
-    catList = await FirestoreHelper.instance.selectAllCats("1");  //catsテーブルを全件読み込む
+    catList = await FirestoreHelper.instance.selectAllCats("1");  //users配下のcatsコレクションのドキュメントをを全件読み込む
     setState(() => isLoading = false);                  //「読み込み済」の状態にする
   }
 

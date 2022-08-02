@@ -9,13 +9,8 @@ class FirestoreHelper {
 
   Future selectAllCats(String userId) {
     final db = FirebaseFirestore.instance;
-    final docRef = db
-        .collection("users")
-        .doc(userId)
-        .get()
-        .then(
-          (DocumentSnapshot doc) {
-          },
+    final docRef = db.collection("users").doc(userId).get().then(
+          (DocumentSnapshot doc) {},
           onError: (e) => print("selectAllCats Error: $e"),
         );
     return docRef;
@@ -29,8 +24,7 @@ class FirestoreHelper {
         .collection("cats")
         .doc(id)
         .get()
-        .then((DocumentSnapshot doc) {
-    });
+        .then((DocumentSnapshot doc) {});
     return docRef;
   }
 
@@ -48,14 +42,14 @@ class FirestoreHelper {
   Future insert(Cats cats, String userId) async {
     final db = FirebaseFirestore.instance;
     final docRef = db
-        .collection("users")
-        .doc(userId)
-        .collection("cats")
-        .withConverter(
-          fromFirestore: Cats.fromFirestore,
-          toFirestore: (Cats cats, options) => cats.toFirestore(),
-        )
-        .doc("1");
+      .collection("users")
+      .doc(userId)
+      .collection("cats")
+      .doc("1")
+      .withConverter(
+        fromFirestore: Cats.fromFirestore,
+        toFirestore: (Cats cats, options) => cats.toFirestore(),
+      );
     await docRef.set(cats);
   }
 }
