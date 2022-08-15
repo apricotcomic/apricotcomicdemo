@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:apricotcomicdemo/model/firestore_cats.dart';
 import 'package:apricotcomicdemo/model/firestore_helper.dart';
@@ -14,11 +15,11 @@ class CatDetail extends StatefulWidget {
 }
 
 class _CatDetailState extends State<CatDetail> {
-  late Cats cats;
   bool isLoading = false;
   static const int textExpandedFlex = 1; // 見出しのexpaded flexの比率
   static const int dataExpandedFlex = 4; // 項目のexpanede flexの比率
-
+  late DocumentSnapshot catSnapshot; //catsテーブルの全件を保有する
+  late Cats cats;
 
 // Stateのサブクラスを作成し、initStateをオーバーライドすると、wedgit作成時に処理を動かすことができる。
 // ここでは、渡されたidをキーとしてcatsテーブルからデータを取得する
@@ -57,7 +58,7 @@ class _CatDetailState extends State<CatDetail> {
           ),
           IconButton(
             onPressed: () async {                         // ゴミ箱のアイコンが押されたときの処理を設定
-              await FirestoreHelper.instance.delete(cats, widget.id);  // 指定されたidのデータを削除する
+              await FirestoreHelper.instance.delete("1", widget.id);  // 指定されたidのデータを削除する
               Navigator.of(context).pop();                // 削除後に前の画面に戻る
             },
             icon: const Icon(Icons.delete),               // ゴミ箱マークのアイコンを表示

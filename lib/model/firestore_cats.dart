@@ -24,23 +24,22 @@ class Cats {
   ) {
     final data = snapshot.data();
     return Cats(
-      id: data?['id'],
-      name: data?['name'],
-      gender: data?['birthday'],
-      birthday: data?['birthday'],
-      memo: data?['memo'],
-      createdAt: data?['createdAt']
-    );
+        id: data?['id'],
+        name: data?['name'],
+        gender: data?['birthday'],
+        birthday: data?['birthday'],
+        memo: data?['memo'],
+        createdAt: data?['createdAt'].toDate());
   }
 
   Map<String, dynamic> toFirestore() {
     return {
       "id": id,
-      if (name != null) "name": name,
-      if (gender != null) "gender": gender,
-      if (birthday != null) "birthday": birthday,
-      if (memo != null) "memo": memo,
-      if (createdAt != null) "createdAt": createdAt,
+      "name": name,
+      "gender": gender,
+      "birthday": birthday,
+      "memo": memo,
+      "createdAt": createdAt,
     };
   }
 }

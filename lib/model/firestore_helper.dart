@@ -7,34 +7,40 @@ class FirestoreHelper {
 
   FirestoreHelper._createInstance();
 
-  Future selectAllCats(String userId) {
+  selectAllCats(String userId) async {
     final db = FirebaseFirestore.instance;
-    final docRef = db.collection("users").doc(userId).get().then(
-          (DocumentSnapshot doc) {},
-          onError: (e) => print("selectAllCats Error: $e"),
-        );
-    return docRef;
+    final snapshot =
+        db.collection("users").doc(userId).collection("cats").withConverter(
+              fromFirestore: Cats.fromFirestore,
+              toFirestore: (Cats cats, _) => cats.toFirestore(),
+            );
+    final cats = await snapshot.get();
+    return cats.docs;
   }
 
-  Future catData(String userId, String id) {
+  catData(String userId, String id) async {
     final db = FirebaseFirestore.instance;
     final docRef = db
         .collection("users")
         .doc(userId)
         .collection("cats")
         .doc(id)
-        .get()
-        .then((DocumentSnapshot doc) {});
-    return docRef;
+        .withConverter(
+          fromFirestore: Cats.fromFirestore,
+          toFirestore: (Cats cats, _) => cats.toFirestore(),
+        );
+    final catdata = await docRef.get();
+    final cat = catdata.data();
+    return cat;
   }
 
-  Future delete(Cats cats, String userId) {
+  Future delete(String userId, String id) {
     final db = FirebaseFirestore.instance;
     return db
         .collection("users")
         .doc(userId)
         .collection("cats")
-        .doc(cats.id)
+        .doc(id)
         .delete();
   }
 
@@ -42,14 +48,14 @@ class FirestoreHelper {
   Future insert(Cats cats, String userId) async {
     final db = FirebaseFirestore.instance;
     final docRef = db
-      .collection("users")
-      .doc(userId)
-      .collection("cats")
-      .doc("1")
-      .withConverter(
-        fromFirestore: Cats.fromFirestore,
-        toFirestore: (Cats cats, options) => cats.toFirestore(),
-      );
+        .collection("users")
+        .doc(userId)
+        .collection("cats")
+        .doc("1")
+        .withConverter(
+          fromFirestore: Cats.fromFirestore,
+          toFirestore: (Cats cats, options) => cats.toFirestore(),
+        );
     await docRef.set(cats);
   }
 }

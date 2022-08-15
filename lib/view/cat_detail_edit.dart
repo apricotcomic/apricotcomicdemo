@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:apricotcomicdemo/model/firestore_cats.dart';
-import 'package:apricotcomicdemo/model/db_helper.dart';
 import 'package:apricotcomicdemo/model/firestore_helper.dart';
 
 class CatDetailEdit extends StatefulWidget {
