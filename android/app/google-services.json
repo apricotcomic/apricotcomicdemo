@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "629408839686",
-    "project_id": "apricotcomic-demo-5b9f3",
-    "storage_bucket": "apricotcomic-demo-5b9f3.appspot.com"
+    "project_number": "27856468215",
+    "project_id": "apricotcomic-demo-e19d5",
+    "storage_bucket": "apricotcomic-demo-e19d5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:629408839686:android:bf9ca231317eebdefaab87",
+        "mobilesdk_app_id": "1:27856468215:android:21b1fa54ed04ca0befbbf2",
         "android_client_info": {
           "package_name": "com.example.apricotcomicdemo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "629408839686-u6a17fbnthhaaehpa4c7guv456lmrmj8.apps.googleusercontent.com",
+          "client_id": "27856468215-18pp24om5trc4uuveg30jps9c1ioc5vq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDrAQePq7x5J6GVBlUdVSR6E_hxU-CFbSI"
+          "current_key": "AIzaSyCuXv3zMj2pnZFipGbdVwJarq7W9GpD9Io"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "629408839686-u6a17fbnthhaaehpa4c7guv456lmrmj8.apps.googleusercontent.com",
+              "client_id": "27856468215-18pp24om5trc4uuveg30jps9c1ioc5vq.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "629408839686-j8lufbp8o104tj98pijkkoml0rqgs5b1.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.apricotcomicdemo"
-              }
             }
           ]
         }

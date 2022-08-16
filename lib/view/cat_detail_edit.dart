@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:apricotcomicdemo/model/firestore_cats.dart';
 import 'package:apricotcomicdemo/model/firestore_helper.dart';

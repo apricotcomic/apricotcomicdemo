@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA1IRtg37h2D9YmRurAi6wcY0CzGOM3VS0',
-    appId: '1:629408839686:web:cbdd8932b426e95bfaab87',
-    messagingSenderId: '629408839686',
-    projectId: 'apricotcomic-demo-5b9f3',
-    authDomain: 'apricotcomic-demo-5b9f3.firebaseapp.com',
-    storageBucket: 'apricotcomic-demo-5b9f3.appspot.com',
-    measurementId: 'G-MBSQKP463Y',
+    apiKey: 'AIzaSyBu7gy-xSaSXLXqq2kZSczGZGez35NgR-Y',
+    appId: '1:27856468215:web:a722fc07a5d35cc0efbbf2',
+    messagingSenderId: '27856468215',
+    projectId: 'apricotcomic-demo-e19d5',
+    authDomain: 'apricotcomic-demo-e19d5.firebaseapp.com',
+    storageBucket: 'apricotcomic-demo-e19d5.appspot.com',
+    measurementId: 'G-53HEXWTGLR',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDrAQePq7x5J6GVBlUdVSR6E_hxU-CFbSI',
-    appId: '1:629408839686:android:bf9ca231317eebdefaab87',
-    messagingSenderId: '629408839686',
-    projectId: 'apricotcomic-demo-5b9f3',
-    storageBucket: 'apricotcomic-demo-5b9f3.appspot.com',
+    apiKey: 'AIzaSyCuXv3zMj2pnZFipGbdVwJarq7W9GpD9Io',
+    appId: '1:27856468215:android:21b1fa54ed04ca0befbbf2',
+    messagingSenderId: '27856468215',
+    projectId: 'apricotcomic-demo-e19d5',
+    storageBucket: 'apricotcomic-demo-e19d5.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAv-Zaukg3ztbEgKZDThckauNfLb8VZwcc',
-    appId: '1:629408839686:ios:391ee1ae22a84718faab87',
-    messagingSenderId: '629408839686',
-    projectId: 'apricotcomic-demo-5b9f3',
-    storageBucket: 'apricotcomic-demo-5b9f3.appspot.com',
-    iosClientId: '629408839686-j8lufbp8o104tj98pijkkoml0rqgs5b1.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCrtQ6m_w7xT07XwYJwS5jw-rkI2lk2haM',
+    appId: '1:27856468215:ios:4cf673b06ad51131efbbf2',
+    messagingSenderId: '27856468215',
+    projectId: 'apricotcomic-demo-e19d5',
+    storageBucket: 'apricotcomic-demo-e19d5.appspot.com',
+    iosClientId: '27856468215-ikooli71r6u6li53q8gfg3qu3r84bnou.apps.googleusercontent.com',
     iosBundleId: 'com.example.apricotcomicdemo',
   );
 }
