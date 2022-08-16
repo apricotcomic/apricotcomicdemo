@@ -34,13 +34,13 @@ class FirestoreHelper {
     return cat;
   }
 
-  Future delete(String userId, String id) {
+  Future delete(String userId, String name) {
     final db = FirebaseFirestore.instance;
     return db
         .collection("users")
         .doc(userId)
         .collection("cats")
-        .doc(id)
+        .doc(name)
         .delete();
   }
 
@@ -51,7 +51,7 @@ class FirestoreHelper {
         .collection("users")
         .doc(userId)
         .collection("cats")
-        .doc("1")
+        .doc(cats.name)
         .withConverter(
           fromFirestore: Cats.fromFirestore,
           toFirestore: (Cats cats, options) => cats.toFirestore(),

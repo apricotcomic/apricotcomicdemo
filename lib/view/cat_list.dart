@@ -17,6 +17,7 @@ class _CatListPageState extends State<CatList> {
   List<DocumentSnapshot> catSnapshot = []; //catsテーブルの全件を保有する
   List<Cats> catList = [];
   bool isLoading = false; //テーブル読み込み中の状態を保有する
+  static const String userId = 'test@apricotcomic.com'; //仮のユーザID。認証機能を実装したら、本物のIDに変更する。
 
 // Stateのサブクラスを作成し、initStateをオーバーライドすると、wedgit作成時に処理を動かすことができる。
 // ここでは、初期処理としてCatsの全データを取得する。
@@ -31,16 +32,16 @@ class _CatListPageState extends State<CatList> {
   Future getCatsList() async {
     setState(() => isLoading = true); //テーブル読み込み前に「読み込み中」の状態にする
     catSnapshot = await FirestoreHelper.instance
-        .selectAllCats("1"); //users配下のcatsコレクションのドキュメントをを全件読み込む
-    catList = catSnapshot.map((doc) => 
-      Cats(
-        id: doc['id'], 
-        name: doc['name'], 
-        gender: doc['gender'], 
-        birthday: doc['birthday'], 
-        memo: doc['memo'], 
-        createdAt: doc['createdAt'].toDate())
-      ).toList();
+        .selectAllCats(userId); //users配下のcatsコレクションのドキュメントをを全件読み込む
+    catList = catSnapshot
+        .map((doc) => Cats(
+            id: doc['id'],
+            name: doc['name'],
+            gender: doc['gender'],
+            birthday: doc['birthday'],
+            memo: doc['memo'],
+            createdAt: doc['createdAt'].toDate()))
+        .toList();
     setState(() => isLoading = false); //「読み込み済」の状態にする
   }
 
@@ -90,7 +91,8 @@ class _CatListPageState extends State<CatList> {
                           // ページ遷移をNavigatorで設定
                           MaterialPageRoute(
                             builder: (context) => CatDetail(
-                                id: cat.id), // cardのデータの詳細を表示するcat_detail.dartへ遷移
+                                userId: userId,
+                                name: cat.name), // cardのデータの詳細を表示するcat_detail.dartへ遷移
                           ),
                         );
                         getCatsList(); // データが更新されているかもしれないので、catsテーブル全件読み直し
@@ -109,7 +111,7 @@ class _CatListPageState extends State<CatList> {
             // ページ遷移をNavigatorで設定
             MaterialPageRoute(
                 builder: (context) =>
-                    const CatDetailEdit() // 詳細更新画面（元ネタがないから新規登録）を表示するcat_detail_edit.dartへ遷移
+                    const CatDetailEdit(userId: userId, cats: null,) // 詳細更新画面（元ネタがないから新規登録）を表示するcat_detail_edit.dartへ遷移
                 ),
           );
           getCatsList(); // 新規登録されているので、catテーブル全件読み直し

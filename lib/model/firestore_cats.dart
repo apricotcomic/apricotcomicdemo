@@ -26,7 +26,7 @@ class Cats {
     return Cats(
         id: data?['id'],
         name: data?['name'],
-        gender: data?['birthday'],
+        gender: data?['gender'],
         birthday: data?['birthday'],
         memo: data?['memo'],
         createdAt: data?['createdAt'].toDate());

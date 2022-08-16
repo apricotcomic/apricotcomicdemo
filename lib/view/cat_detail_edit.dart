@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:apricotcomicdemo/model/firestore_cats.dart';
 import 'package:apricotcomicdemo/model/firestore_helper.dart';
 
 class CatDetailEdit extends StatefulWidget {
+  final String userId;
   final Cats? cats;
 
-  const CatDetailEdit({Key? key, this.cats}) : super(key: key);
+  const CatDetailEdit({Key? key,required this.userId, this.cats}) : super(key: key);
 
   @override
   _CatDetailEditState createState() => _CatDetailEditState();
@@ -196,10 +198,11 @@ class _CatDetailEditState extends State<CatDetailEdit> {
       name: name,
       birthday: birthday,
       gender: gender,
-      memo: memo, createdAt: null,
+      memo: memo, 
+      createdAt: createdAt,
     );
 
-    await FirestoreHelper.instance.insert(cat, "1"); // catの内容で更新する
+    await FirestoreHelper.instance.insert(cat, widget.userId); // catの内容で更新する
   }
 
   // 追加処理の呼び出し
@@ -213,6 +216,6 @@ class _CatDetailEditState extends State<CatDetailEdit> {
       memo: memo,
       createdAt: createdAt,
     );
-    await FirestoreHelper.instance.insert(cat, "1"); // catの内容で追加する
+    await FirestoreHelper.instance.insert(cat, widget.userId); // catの内容で追加する
   }
 }
