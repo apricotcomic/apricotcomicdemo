@@ -62,16 +62,13 @@ class _CatDetailEditState extends State<CatDetailEdit> {
         child: Column(children: <Widget>[
           Row(children: [
             // 名前の行の設定
-            const Expanded(
-              // 見出し（名前）
+            const Expanded(                   // 見出し（名前）
               flex: textExpandedFlex,
-              child: Text(
-                '名前',
+              child: Text('名前',
                 textAlign: TextAlign.center,
-              ),
+              ), 
             ),
-            Expanded(
-              // 名前入力エリアの設定
+            Expanded(                         // 名前入力エリアの設定
               flex: dataExpandedFlex,
               child: TextFormField(
                 maxLines: 1,
@@ -88,16 +85,13 @@ class _CatDetailEditState extends State<CatDetailEdit> {
           ]),
           // 性別の行の設定
           Row(children: [
-            const Expanded(
-              // 見出し（性別）
+            const Expanded(                     // 見出し（性別）
               flex: textExpandedFlex,
-              child: Text(
-                '性別',
+              child: Text('性別',
                 textAlign: TextAlign.center,
               ),
             ),
-            Expanded(
-              // 性別をドロップダウンで設定
+            Expanded(                           // 性別をドロップダウンで設定
               flex: dataExpandedFlex,
               child: DropdownButton(
                 items: _list.map<DropdownMenuItem<String>>((String value) {
@@ -112,16 +106,13 @@ class _CatDetailEditState extends State<CatDetailEdit> {
             ),
           ]),
           Row(children: [
-            const Expanded(
-              // 見出し（誕生日）
+            const Expanded(                 // 見出し（誕生日）
               flex: textExpandedFlex,
-              child: Text(
-                '誕生日',
+              child: Text('誕生日',
                 textAlign: TextAlign.center,
               ),
             ),
-            Expanded(
-              // 誕生日入力エリアの設定
+            Expanded(                     // 誕生日入力エリアの設定
               flex: dataExpandedFlex,
               child: TextFormField(
                 maxLines: 1,
@@ -135,15 +126,13 @@ class _CatDetailEditState extends State<CatDetailEdit> {
             ),
           ]),
           Row(children: [
-            const Expanded(
-                // 見出し（メモ）
-                flex: textExpandedFlex,
-                child: Text(
-                  'メモ',
-                  textAlign: TextAlign.center,
-                )),
-            Expanded(
-              // メモ入力エリアの設定
+            const Expanded(                     // 見出し（メモ）
+              flex: textExpandedFlex,
+              child: Text('メモ',
+                textAlign: TextAlign.center,
+                )
+            ),
+            Expanded(                           // メモ入力エリアの設定
               flex: dataExpandedFlex,
               child: TextFormField(
                 maxLines: 1,
@@ -179,21 +168,20 @@ class _CatDetailEditState extends State<CatDetailEdit> {
 
 // 保存ボタンを押したとき実行する処理
   void createOrUpdateCat() async {
-    final isUpdate = (widget.cats != null); // 画面が空でなかったら
+    final isUpdate = (widget.cats != null);     // 画面が空でなかったら
 
     if (isUpdate) {
-      await updateCat(); // updateの処理
+      await updateCat();                        // updateの処理
     } else {
-      await createCat(); // insertの処理
+      await createCat();                        // insertの処理
     }
 
-    Navigator.of(context).pop(); // 前の画面に戻る
+    Navigator.of(context).pop();                // 前の画面に戻る
   }
 
   // 更新処理の呼び出し
   Future updateCat() async {
-    final cat = Cats(
-      // 画面の内容をcatにセット
+    final cat = Cats(                           // 画面の内容をcatにセット
       id: id,
       name: name,
       birthday: birthday,
@@ -207,8 +195,7 @@ class _CatDetailEditState extends State<CatDetailEdit> {
 
   // 追加処理の呼び出し
   Future createCat() async {
-    final cat = Cats(
-      // 入力された内容をcatにセット
+    final cat = Cats(                           // 入力された内容をcatにセット
       id: id,
       name: name,
       birthday: birthday,
