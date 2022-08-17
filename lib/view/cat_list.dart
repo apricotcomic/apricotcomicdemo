@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:apricotcomicdemo/model/cats.dart';
-import 'package:apricotcomicdemo/model/db_helper.dart';
+import 'package:apricotcomicdemo/model/firestore_cats.dart';
+import 'package:apricotcomicdemo/model/firestore_helper.dart';
 import 'package:apricotcomicdemo/view/cat_detail.dart';
 import 'package:apricotcomicdemo/view/cat_detail_edit.dart';
 
@@ -13,8 +14,10 @@ class CatList extends StatefulWidget {
 }
 
 class _CatListPageState extends State<CatList> {
-  List<Cats> catList = [];  //catsテーブルの全件を保有する
-  bool isLoading = false;   //テーブル読み込み中の状態を保有する
+  List<DocumentSnapshot> catSnapshot = [];
+  List<Cats> catList = []; //catsテーブルの全件を保有する
+  bool isLoading = false; //テーブル読み込み中の状態を保有する
+  static const String userId = 'test@apricotcomic.com'; //仮のユーザID。認証機能を実装したら、本物のIDに変更する。
 
 // Stateのサブクラスを作成し、initStateをオーバーライドすると、wedgit作成時に処理を動かすことができる。
 // ここでは、初期処理としてCatsの全データを取得する。
@@ -28,7 +31,17 @@ class _CatListPageState extends State<CatList> {
 // catsテーブルに登録されている全データを取ってくる
   Future getCatsList() async {
     setState(() => isLoading = true);                   //テーブル読み込み前に「読み込み中」の状態にする
-    catList = await DbHelper.instance.selectAllCats();  //catsテーブルを全件読み込む
+    catSnapshot = await FirestoreHelper.instance
+        .selectAllCats(userId);                         //users配下のcatsコレクションのドキュメントをを全件読み込む
+    catList = catSnapshot
+        .map((doc) => Cats(
+            id: doc['id'],
+            name: doc['name'],
+            gender: doc['gender'],
+            birthday: doc['birthday'],
+            memo: doc['memo'],
+            createdAt: doc['createdAt'].toDate()))
+        .toList();
     setState(() => isLoading = false);                  //「読み込み済」の状態にする
   }
 
@@ -68,7 +81,7 @@ class _CatListPageState extends State<CatList> {
                       onTap: () async {                     // cardをtapしたときの処理を設定
                         await Navigator.of(context).push(   // ページ遷移をNavigatorで設定
                           MaterialPageRoute(
-                            builder: (context) => CatDetail(id: cat.id!),   // cardのデータの詳細を表示するcat_detail.dartへ遷移
+                            builder: (context) => CatDetail(userId: userId,name: cat.name), // cardのデータの詳細を表示するcat_detail.dartへ遷移
                           ),
                         );
                         getCatsList();    // データが更新されているかもしれないので、catsテーブル全件読み直し
@@ -83,7 +96,7 @@ class _CatListPageState extends State<CatList> {
         onPressed: () async {                                       // ＋ボタンを押したときの処理を設定
           await Navigator.of(context).push(                         // ページ遷移をNavigatorで設定
             MaterialPageRoute(
-              builder: (context) => const CatDetailEdit()           // 詳細更新画面（元ネタがないから新規登録）を表示するcat_detail_edit.dartへ遷移
+              builder: (context) => const CatDetailEdit(userId: userId, cats: null,) // 詳細更新画面（元ネタがないから新規登録）を表示するcat_detail_edit.dartへ遷移
             ),
           );
           getCatsList();                                            // 新規登録されているので、catテーブル全件読み直し

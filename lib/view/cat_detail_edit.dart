@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:apricotcomicdemo/model/cats.dart';
-import 'package:apricotcomicdemo/model/db_helper.dart';
+import 'package:apricotcomicdemo/model/firestore_cats.dart';
+import 'package:apricotcomicdemo/model/firestore_helper.dart';
 
 class CatDetailEdit extends StatefulWidget {
+  final String userId;
   final Cats? cats;
 
-  const CatDetailEdit({Key? key, this.cats}) : super(key: key);
+  const CatDetailEdit({Key? key,required this.userId, this.cats}) : super(key: key);
 
   @override
   _CatDetailEditState createState() => _CatDetailEditState();
 }
 
 class _CatDetailEditState extends State<CatDetailEdit> {
-  late int id;
+  late String id;
   late String name;
   late String birthday;
   late String gender;
@@ -29,7 +30,7 @@ class _CatDetailEditState extends State<CatDetailEdit> {
   @override
   void initState() {
     super.initState();
-    id = widget.cats?.id ?? 0;
+    id = widget.cats?.id ?? '';
     name = widget.cats?.name ?? '';
     birthday = widget.cats?.birthday ?? '';
     gender = widget.cats?.gender ?? '';
@@ -179,25 +180,28 @@ class _CatDetailEditState extends State<CatDetailEdit> {
 
   // 更新処理の呼び出し
   Future updateCat() async {
-    final cat = widget.cats!.copy(              // 画面の内容をcatにセット
+    final cat = Cats(                           // 画面の内容をcatにセット
+      id: id,
       name: name,
       birthday: birthday,
       gender: gender,
-      memo: memo,
+      memo: memo, 
+      createdAt: createdAt,
     );
 
-    await DbHelper.instance.update(cat);        // catの内容で更新する
+    await FirestoreHelper.instance.insert(cat, widget.userId); // catの内容で更新する
   }
 
   // 追加処理の呼び出し
   Future createCat() async {
     final cat = Cats(                           // 入力された内容をcatにセット
+      id: id,
       name: name,
       birthday: birthday,
       gender: gender,
       memo: memo,
       createdAt: createdAt,
     );
-    await DbHelper.instance.insert(cat);        // catの内容で追加する
+    await FirestoreHelper.instance.insert(cat, widget.userId); // catの内容で追加する
   }
 }

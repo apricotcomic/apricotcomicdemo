@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27856468215",
+    "project_id": "apricotcomic-demo-e19d5",
+    "storage_bucket": "apricotcomic-demo-e19d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27856468215:android:21b1fa54ed04ca0befbbf2",
+        "android_client_info": {
+          "package_name": "com.example.apricotcomicdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27856468215-18pp24om5trc4uuveg30jps9c1ioc5vq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuXv3zMj2pnZFipGbdVwJarq7W9GpD9Io"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27856468215-18pp24om5trc4uuveg30jps9c1ioc5vq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

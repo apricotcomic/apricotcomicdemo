@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:apricotcomicdemo/model/cats.dart';
-import 'package:apricotcomicdemo/model/db_helper.dart';
+import 'package:apricotcomicdemo/model/firestore_cats.dart';
+import 'package:apricotcomicdemo/model/firestore_helper.dart';
 import 'package:apricotcomicdemo/view/cat_detail_edit.dart';
 
 // catsテーブルの中の1件のデータに対する操作を行うクラス
 class CatDetail extends StatefulWidget {
-  final int id;
+  final String userId;
+  final String name;
 
-  const CatDetail({Key? key, required this.id}) : super(key: key);
+  const CatDetail({Key? key, required this.userId, required this.name})
+      : super(key: key);
 
   @override
   _CatDetailState createState() => _CatDetailState();
@@ -32,7 +34,7 @@ class _CatDetailState extends State<CatDetail> {
 // catsテーブルから指定されたidのデータを1件取得する
   Future catData() async {
     setState(() => isLoading = true);
-    cats = await DbHelper.instance.catData(widget.id);
+    cats = await FirestoreHelper.instance.catData(widget.userId, widget.name);
     setState(() => isLoading = false);
   }
 
@@ -48,6 +50,7 @@ class _CatDetailState extends State<CatDetail> {
                 MaterialPageRoute(
                   builder: (context) => CatDetailEdit(    // 詳細更新画面を表示する
                     cats: cats,
+                    userId: widget.userId,
                   ),
                 ),
               );
@@ -57,7 +60,8 @@ class _CatDetailState extends State<CatDetail> {
           ),
           IconButton(
             onPressed: () async {                         // ゴミ箱のアイコンが押されたときの処理を設定
-              await DbHelper.instance.delete(widget.id);  // 指定されたidのデータを削除する
+              await FirestoreHelper.instance
+                  .delete(widget.userId, widget.name);    // 指定された名前のデータを削除する
               Navigator.of(context).pop();                // 削除後に前の画面に戻る
             },
             icon: const Icon(Icons.delete),               // ゴミ箱マークのアイコンを表示
